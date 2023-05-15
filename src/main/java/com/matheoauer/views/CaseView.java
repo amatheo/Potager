@@ -4,10 +4,10 @@ import javax.swing.*;
 
 public class CaseView extends JPanel {
 
-    private JLabel label;
-    private ImageIcon icon;
-    private int x;
-    private int y;
+    private final JLabel label;
+    private final ImageIcon icon;
+    private final int x;
+    private final int y;
 
     public CaseView(ImageIcon icon, int x, int y) {
         super();

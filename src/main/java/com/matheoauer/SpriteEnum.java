@@ -17,7 +17,7 @@ public enum SpriteEnum {
 
     private final int index;
 
-    private SpriteEnum(int index) {
+    SpriteEnum(int index) {
         this.index = index;
     }
 

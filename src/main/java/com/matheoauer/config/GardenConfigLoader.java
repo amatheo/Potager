@@ -3,11 +3,8 @@ package com.matheoauer.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.matheoauer.config.sprite.AtlasLoader;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Map;
-import java.util.Objects;
 
 import static java.lang.System.Logger.Level;
 
@@ -15,24 +12,20 @@ public class GardenConfigLoader {
 
     public static final String CONFIG_FILENAME = "config.json";
     public static final String ATLAS_FILENAME = "atlas.png";
-
-    private final System.Logger LOGGER = System.getLogger("GardenConfigLoader");
-
-    private final GardenConfiguration gardenConfiguration;
-
-    private final AtlasLoader atlasLoader;
-
     // Singleton pattern
     private static GardenConfigLoader instance;
+    private final System.Logger LOGGER = System.getLogger("GardenConfigLoader");
+    private final GardenConfiguration gardenConfiguration;
+    private final AtlasLoader atlasLoader;
 
     private GardenConfigLoader() {
         ObjectMapper mapper = new ObjectMapper();
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
         InputStream is = classloader.getResourceAsStream(CONFIG_FILENAME);
         try (
-                InputStream atlasIs = classloader.getResourceAsStream(ATLAS_FILENAME);
+                InputStream atlasIs = classloader.getResourceAsStream(ATLAS_FILENAME)
 
-                ) {
+        ) {
             this.gardenConfiguration = mapper.readValue(is, GardenConfiguration.class);
             atlasLoader = new AtlasLoader(atlasIs, 32, 32);
         } catch (IOException e) {

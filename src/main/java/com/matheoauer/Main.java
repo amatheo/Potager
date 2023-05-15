@@ -2,8 +2,8 @@ package com.matheoauer;
 
 import com.matheoauer.config.GardenConfigLoader;
 import com.matheoauer.models.Garden;
-import com.matheoauer.runnables.Scheduler;
 import com.matheoauer.runnables.GrowthSimulator;
+import com.matheoauer.runnables.Scheduler;
 import com.matheoauer.views.View;
 
 public class Main {

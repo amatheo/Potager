@@ -4,8 +4,8 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class Case extends Observable implements Observer {
-    private int x;
-    private int y;
+    private final int x;
+    private final int y;
     private Vegetable vegetable;
 
     public Case(int x, int y) {
@@ -32,7 +32,7 @@ public class Case extends Observable implements Observer {
     }
 
     public void setVegetable(Vegetable vegetable) {
-        if (this.vegetable != null){
+        if (this.vegetable != null) {
             this.vegetable.deleteObserver(this);
         }
         vegetable.addObserver(this);

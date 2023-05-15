@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.Observable;
 
 public class Vegetable extends Observable {
-    private String name;
+    private final String name;
     private Date plantedAt;
     private Date harvestedAt;
 
@@ -41,13 +41,13 @@ public class Vegetable extends Observable {
         return this.growth;
     }
 
+    public Date getPlantedAt() {
+        return this.plantedAt;
+    }
+
     public void setPlantedAt(Date plantedAt) {
         this.plantedAt = plantedAt;
         this.setChanged();
         this.notifyObservers();
-    }
-
-    public Date getPlantedAt() {
-        return this.plantedAt;
     }
 }

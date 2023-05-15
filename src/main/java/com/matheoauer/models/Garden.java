@@ -1,18 +1,13 @@
 package com.matheoauer.models;
 
-import com.matheoauer.models.Case;
-
 import java.util.Observable;
 import java.util.Observer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Garden extends Observable implements Observer {
 
-    private Case[][] cases;
-
-    private int width;
-    private int height;
+    private final int width;
+    private final int height;
+    private final Case[][] cases;
 
     public Garden(int width, int height) {
         this.width = width;
@@ -38,6 +33,7 @@ public class Garden extends Observable implements Observer {
 
     /**
      * Set the case at the given position, you can't set a case outside the initial size of the potager
+     *
      * @param x the x position of the case
      * @param y the y position of the case
      * @param c the case to set
@@ -56,6 +52,7 @@ public class Garden extends Observable implements Observer {
 
     /**
      * Get the case at the given position
+     *
      * @param x the x position of the case
      * @param y the y position of the case
      * @return the case at the given position

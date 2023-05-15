@@ -1,10 +1,8 @@
 package com.matheoauer.config.sprite;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -23,7 +21,7 @@ public class AtlasLoader {
         this.loadSpriteArray(atlasIs);
     }
 
-    public void loadSpriteArray(InputStream atlasIs){
+    public void loadSpriteArray(InputStream atlasIs) {
         try {
             BufferedImage image = ImageIO.read(atlasIs); // chargement de l'image globale
 

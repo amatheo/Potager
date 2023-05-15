@@ -10,16 +10,13 @@ import java.util.Observable;
 
 public class Scheduler extends Observable implements Runnable {
 
-    System.Logger LOGGER = System.getLogger("Scheduler");
-
     private static Scheduler instance;
     private final Date date;
-    private Garden garden;
-
-    List<Simulator> tasks;
-
-    private int timeMulti;
     private final long sleepTimeMs;
+    System.Logger LOGGER = System.getLogger("Scheduler");
+    List<Simulator> tasks;
+    private Garden garden;
+    private int timeMulti;
 
     private Scheduler(Date startDate, long sleepTimeMs, int timeMulti) {
         this.date = startDate;
@@ -56,6 +53,7 @@ public class Scheduler extends Observable implements Runnable {
     public Date getDate() {
         return date;
     }
+
     public void setGarden(Garden garden) {
         this.garden = garden;
     }
