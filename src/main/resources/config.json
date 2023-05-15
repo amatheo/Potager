@@ -1,0 +1,19 @@
+{
+  "name": "Garden",
+  "height": 10,
+  "width": 10,
+  "simulation": {
+    "time_sleep": 3000,
+    "time_multiplier": 1
+  },
+  "vegetables": [
+    {
+      "name": "Eggplant",
+      "grow_rate": 0.025
+    },
+    {
+      "name": "Celery",
+      "grow_rate": 0.05
+    }
+  ]
+}
