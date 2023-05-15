@@ -1,0 +1,53 @@
+package com.matheoauer.models;
+
+import java.util.Date;
+import java.util.Observable;
+
+public class Vegetable extends Observable {
+    private String name;
+    private Date plantedAt;
+    private Date harvestedAt;
+
+    /**
+     * The growth of the vegetable, between 0 and 1
+     * 0 means the vegetable is just planted
+     * 1 means the vegetable is ready to be harvested
+     */
+    private float growth;
+
+    public Vegetable(String name) {
+        this.name = name;
+        this.growth = 0;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean isHarvestable() {
+        return growth == 1;
+    }
+
+    public void grow(float growth) {
+        this.growth += growth;
+        if (this.growth > 1) {
+            this.growth = 1;
+        }
+        this.setChanged();
+        this.notifyObservers();
+    }
+
+    public float getGrowth() {
+        return this.growth;
+    }
+
+    public void setPlantedAt(Date plantedAt) {
+        this.plantedAt = plantedAt;
+        this.setChanged();
+        this.notifyObservers();
+    }
+
+    public Date getPlantedAt() {
+        return this.plantedAt;
+    }
+}
