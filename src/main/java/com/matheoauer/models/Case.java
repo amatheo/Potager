@@ -1,5 +1,7 @@
 package com.matheoauer.models;
 
+import com.matheoauer.runnables.Scheduler;
+
 import java.util.Observable;
 import java.util.Observer;
 
@@ -13,12 +15,17 @@ public class Case extends Observable implements Observer {
         this.x = x;
         this.y = y;
         this.vegetable = null;
+        this.soil = null;
     }
 
     public Case(int x, int y, Vegetable vegetable, Soil soil) {
         this(x, y);
-        setVegetable(vegetable);
-        setSoil(soil);
+        if (vegetable != null) {
+            setVegetable(vegetable);
+        }
+        if (soil != null) {
+            setSoil(soil);
+        }
     }
 
     public int getX() {
@@ -33,18 +40,19 @@ public class Case extends Observable implements Observer {
         return vegetable;
     }
 
-    public Soil getSoil() {
-        return soil;
-    }
-
     public void setVegetable(Vegetable vegetable) {
         if (this.vegetable != null) {
             this.vegetable.deleteObserver(this);
         }
         vegetable.addObserver(this);
         this.vegetable = vegetable;
+        this.vegetable.setPlantedAt(Scheduler.getInstance().getDate());
         this.setChanged();
         this.notifyObservers();
+    }
+
+    public Soil getSoil() {
+        return soil;
     }
 
     private void setSoil(Soil soil) {

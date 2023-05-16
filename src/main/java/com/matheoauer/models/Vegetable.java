@@ -17,8 +17,16 @@ public class Vegetable extends Observable {
 
     public Vegetable(String name) {
         this.name = name;
-        this.growth = 0;
     }
+
+    public Vegetable(String name, float growth) {
+        this(name);
+        if (growth < 0 || growth > 1) {
+            throw new IllegalArgumentException("The growth must be between 0 and 1");
+        }
+        this.growth = growth;
+    }
+
 
     public String getName() {
         return name;

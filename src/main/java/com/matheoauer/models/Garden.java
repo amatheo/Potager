@@ -1,9 +1,6 @@
 package com.matheoauer.models;
 
-import java.util.Observable;
-import java.util.Observer;
-
-public class Garden extends Observable implements Observer {
+public class Garden {
 
     private final int width;
     private final int height;
@@ -14,11 +11,15 @@ public class Garden extends Observable implements Observer {
         this.height = height;
         cases = new Case[width][height];
 
-        Vegetable v = new Vegetable("Tomato");
+        this.build();
+    }
 
+    private void build() {
         for (int i = 0; i < cases.length; i++) {
             for (int j = 0; j < cases[0].length; j++) {
-                setCase(i, j, new Case(i, j, v));
+                Soil defaultSoil = new Soil(0.2f);
+                Vegetable defaultVegetable = new Vegetable("Corn", 0.4f);
+                setCase(i, j, new Case(i, j, defaultVegetable, defaultSoil));
             }
         }
     }
@@ -42,12 +43,11 @@ public class Garden extends Observable implements Observer {
         if (x < 0 || x >= cases.length || y < 0 || y >= cases[0].length) {
             throw new IllegalArgumentException("The case is outside the potager");
         }
-        // Remove the observer from the old case
+        // Remove all the observer from the old case
         if (cases[x][y] != null) {
-            cases[x][y].deleteObserver(this);
+            cases[x][y].deleteObservers();
         }
         cases[x][y] = c;
-        cases[x][y].addObserver(this);
     }
 
     /**
@@ -58,13 +58,9 @@ public class Garden extends Observable implements Observer {
      * @return the case at the given position
      */
     public Case getCase(int x, int y) {
+        if (x < 0 || x >= cases.length || y < 0 || y >= cases[0].length) {
+            throw new IllegalArgumentException("The case is outside the potager");
+        }
         return cases[x][y];
-    }
-
-    @Override
-    public void update(Observable o, Object arg) {
-        Case c = (Case) o;
-        this.setChanged();
-        this.notifyObservers(c);
     }
 }
