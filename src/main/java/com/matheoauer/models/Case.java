@@ -7,6 +7,7 @@ public class Case extends Observable implements Observer {
     private final int x;
     private final int y;
     private Vegetable vegetable;
+    private Soil soil;
 
     public Case(int x, int y) {
         this.x = x;
@@ -14,9 +15,10 @@ public class Case extends Observable implements Observer {
         this.vegetable = null;
     }
 
-    public Case(int x, int y, Vegetable vegetable) {
+    public Case(int x, int y, Vegetable vegetable, Soil soil) {
         this(x, y);
         setVegetable(vegetable);
+        setSoil(soil);
     }
 
     public int getX() {
@@ -31,12 +33,26 @@ public class Case extends Observable implements Observer {
         return vegetable;
     }
 
+    public Soil getSoil() {
+        return soil;
+    }
+
     public void setVegetable(Vegetable vegetable) {
         if (this.vegetable != null) {
             this.vegetable.deleteObserver(this);
         }
         vegetable.addObserver(this);
         this.vegetable = vegetable;
+        this.setChanged();
+        this.notifyObservers();
+    }
+
+    private void setSoil(Soil soil) {
+        if (this.soil != null) {
+            this.soil.deleteObserver(this);
+        }
+        soil.addObserver(this);
+        this.soil = soil;
         this.setChanged();
         this.notifyObservers();
     }
