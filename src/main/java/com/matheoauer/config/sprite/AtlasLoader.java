@@ -13,11 +13,13 @@ public class AtlasLoader {
     private final List<Image> spriteArray;
     private final int spriteWidth;
     private final int spriteHeight;
+    private final float scale;
 
-    public AtlasLoader(InputStream atlasIs, int spriteWidth, int spriteHeight) {
+    public AtlasLoader(InputStream atlasIs, int spriteWidth, int spriteHeight, float scale) {
         spriteArray = new ArrayList<>();
         this.spriteWidth = spriteWidth;
         this.spriteHeight = spriteHeight;
+        this.scale = scale;
         this.loadSpriteArray(atlasIs);
     }
 
@@ -32,7 +34,7 @@ public class AtlasLoader {
             for (int y = 0; y < height; y += spriteHeight) {
                 for (int x = 0; x < width; x += spriteWidth) {
                     BufferedImage subImage = image.getSubimage(x, y, spriteWidth, spriteHeight);
-                    Image scaledInstance = subImage.getScaledInstance(20, 20, 0);
+                    Image scaledInstance = subImage.getScaledInstance((int) (spriteWidth*scale), (int) (spriteHeight*scale), 0);
                     spriteArray.add(scaledInstance);
                 }
             }

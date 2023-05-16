@@ -27,7 +27,7 @@ public class GardenConfigLoader {
 
         ) {
             this.gardenConfiguration = mapper.readValue(is, GardenConfiguration.class);
-            atlasLoader = new AtlasLoader(atlasIs, 32, 32);
+            atlasLoader = new AtlasLoader(atlasIs, 32, 32, 2);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
