@@ -18,7 +18,7 @@ public class Garden {
         for (int i = 0; i < cases.length; i++) {
             for (int j = 0; j < cases[0].length; j++) {
                 Soil defaultSoil = new Soil(0.2f);
-                Vegetable defaultVegetable = new Vegetable("Corn", 0.4f);
+                Vegetable defaultVegetable = new Vegetable("Corn", 0.4f, 0f);
                 setCase(i, j, new Case(i, j, defaultVegetable, defaultSoil));
             }
         }
