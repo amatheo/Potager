@@ -11,15 +11,17 @@ import java.util.Observable;
 public class Scheduler extends Observable implements Runnable {
 
     private static Scheduler instance;
-    private final Date date;
+    private final Date oldDate;
     private final long sleepTimeMs;
     System.Logger LOGGER = System.getLogger("Scheduler");
     List<Simulator> tasks;
+    private Date date;
     private Garden garden;
     private int timeMulti;
 
     private Scheduler(Date startDate, long sleepTimeMs, int timeMulti) {
         this.date = startDate;
+        this.oldDate = startDate;
         this.tasks = new ArrayList<>();
         this.sleepTimeMs = sleepTimeMs;
         this.timeMulti = timeMulti;
@@ -62,19 +64,15 @@ public class Scheduler extends Observable implements Runnable {
     @Override
     public void run() {
         while (true) {
-            String info = "Scheduler tick !\n";
-            info += "Simulation Date : " + date.toString() + "\n";
-            info += "Time multiplier : " + timeMulti + "\n";
-            info += "Tasks : " + tasks.size() + "\n";
+            // Update timings
+            oldDate.setTime(date.getTime());
+            date = new Date((oldDate.getTime() + (sleepTimeMs * timeMulti)));
 
-            LOGGER.log(System.Logger.Level.INFO, info);
             for (Simulator task : tasks) {
                 task.simulate(date);
             }
-
             try {
                 Thread.sleep(sleepTimeMs);
-                date.setTime(date.getTime() + (sleepTimeMs * timeMulti));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -84,5 +82,9 @@ public class Scheduler extends Observable implements Runnable {
     public void start() {
         Thread thread = new Thread(this);
         thread.start();
+    }
+
+    public long getDeltaTime() {
+        return date.getTime() - oldDate.getTime();
     }
 }

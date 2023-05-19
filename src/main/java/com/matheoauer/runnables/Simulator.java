@@ -17,8 +17,4 @@ public abstract class Simulator implements Runnable {
         this.newDate = date;
         this.run();
     }
-
-    protected int getDaysBetween() {
-        return (int) ((this.newDate.getTime() - this.oldDate.getTime()) / (1000 * 60 * 60 * 24));
-    }
 }
