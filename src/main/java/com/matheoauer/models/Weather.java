@@ -1,6 +1,8 @@
 package com.matheoauer.models;
 
-public class Weather {
+import java.util.Observable;
+
+public class Weather extends Observable {
 
     /**
      * The air humidity between 0 and 1
@@ -33,6 +35,8 @@ public class Weather {
 
     public void setAirHumidity(float airHumidity) {
         this.airHumidity = airHumidity;
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public float getAirTemperature() {
@@ -41,6 +45,8 @@ public class Weather {
 
     public void setAirTemperature(float airTemperature) {
         this.airTemperature = airTemperature;
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public float getSunExposure() {
@@ -49,5 +55,7 @@ public class Weather {
 
     public void setSunExposure(float sunExposure) {
         this.sunExposure = sunExposure;
+        this.setChanged();
+        this.notifyObservers();
     }
 }

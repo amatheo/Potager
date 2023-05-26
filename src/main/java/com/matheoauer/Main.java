@@ -18,8 +18,8 @@ public class Main {
             Garden garden = new Garden(width, height);
             Scheduler scheduler = Scheduler.getInstance();
             scheduler.setGarden(garden);
-
             View view = new View(garden);
+            scheduler.addObserver(view);
 
             GrowthSimulator growthSimulator = new GrowthSimulator();
             //SoilWatering soilWatering = new SoilWatering();

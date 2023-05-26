@@ -6,8 +6,7 @@ import com.matheoauer.config.sprite.AtlasLoader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
-
-import static java.lang.System.Logger.Level;
+import java.util.Optional;
 
 public class GardenConfigLoader {
 
@@ -51,14 +50,8 @@ public class GardenConfigLoader {
         return atlasLoader;
     }
 
-    public VegetableConf findVegetable(String name) {
-        for (VegetableConf v : getGardenConfiguration().getVegetables()) {
-            if (v.getName().equalsIgnoreCase(name)) {
-                return v;
-            }
-        }
-        LOGGER.log(Level.ERROR, "No vegetable found for name " + name);
-        return null;
+    public Optional<VegetableConf> findVegetable(String name) {
+        return getVegetables().stream().filter(v -> v.getName().equalsIgnoreCase(name)).findFirst();
     }
 
     public List<VegetableConf> getVegetables() {

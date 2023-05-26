@@ -5,6 +5,7 @@ import com.matheoauer.config.GardenConfigLoader;
 import com.matheoauer.models.Case;
 import com.matheoauer.models.Garden;
 import com.matheoauer.models.Vegetable;
+import com.matheoauer.runnables.Scheduler;
 import com.matheoauer.views.adapter.CaseMouseAdapter;
 
 import javax.swing.*;
@@ -12,6 +13,7 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Date;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -87,6 +89,9 @@ public class View extends JFrame implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-
+        if (o instanceof Scheduler scheduler) {
+            Date date = scheduler.getDate();
+            setTitle("Simulation Date - " + date);
+        }
     }
 }

@@ -1,12 +1,15 @@
 package com.matheoauer.models;
 
+import com.matheoauer.config.GardenConfigLoader;
+import com.matheoauer.config.VegetableConf;
+
 import java.util.Date;
 import java.util.Observable;
 
 public class Vegetable extends Observable {
     private final String name;
+    private VegetableConf vegetableConf;
     private Date plantedAt;
-
     /**
      * The growth of the vegetable, between 0 and 1
      * 0 means the vegetable is just planted
@@ -26,6 +29,7 @@ public class Vegetable extends Observable {
      */
     public Vegetable(String name) {
         this.name = name;
+        GardenConfigLoader.getInstance().findVegetable(name).ifPresent(vegetableConf -> this.vegetableConf = vegetableConf);
     }
 
     public Vegetable(String name, float growth, float decay) {
@@ -83,5 +87,9 @@ public class Vegetable extends Observable {
 
     public float getDecay() {
         return this.decay;
+    }
+
+    public VegetableConf getVegetableConf() {
+        return this.vegetableConf;
     }
 }

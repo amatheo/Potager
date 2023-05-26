@@ -15,6 +15,12 @@ public class VegetableConf {
         return this.name;
     }
 
+    /**
+     * The grow rate of the vegetable, between 0 and 1
+     * <p>The grow rate is for a day, or 86400000 milliseconds</p>
+     *
+     * @return
+     */
     @JsonProperty("grow_rate")
     public double getGrowRate() {
         return this.growRate;

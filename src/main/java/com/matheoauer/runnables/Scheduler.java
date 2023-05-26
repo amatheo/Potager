@@ -71,6 +71,8 @@ public class Scheduler extends Observable implements Runnable {
             for (Simulator task : tasks) {
                 task.simulate(date);
             }
+            this.setChanged();
+            this.notifyObservers();
             try {
                 Thread.sleep(sleepTimeMs);
             } catch (InterruptedException e) {
