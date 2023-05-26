@@ -51,8 +51,8 @@ public class GardenConfigLoader {
         return atlasLoader;
     }
 
-    public Vegetable findVegetable(String name) {
-        for (Vegetable v : getGardenConfiguration().getVegetables()) {
+    public VegetableConf findVegetable(String name) {
+        for (VegetableConf v : getGardenConfiguration().getVegetables()) {
             if (v.getName().equalsIgnoreCase(name)) {
                 return v;
             }
@@ -61,7 +61,7 @@ public class GardenConfigLoader {
         return null;
     }
 
-    public List<Vegetable> getVegetables() {
+    public List<VegetableConf> getVegetables() {
         return getGardenConfiguration().getVegetables();
     }
 }

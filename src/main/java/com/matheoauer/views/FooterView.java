@@ -1,7 +1,7 @@
 package com.matheoauer.views;
 
 import com.matheoauer.config.GardenConfigLoader;
-import com.matheoauer.config.Vegetable;
+import com.matheoauer.config.VegetableConf;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,12 +11,12 @@ import java.util.List;
 
 public class FooterView extends JPanel {
     public FooterView() {
-        List<Vegetable> allVegetables = GardenConfigLoader.getInstance().getVegetables();
-        this.setLayout(new GridLayout(1, allVegetables.size()));
+        List<VegetableConf> allVegetableConfs = GardenConfigLoader.getInstance().getVegetables();
+        this.setLayout(new GridLayout(1, allVegetableConfs.size()));
         setSize(new Dimension(800, 100));
 
-        for (Vegetable vegetable : allVegetables) {
-            JLabel label = new JLabel(vegetable.getName());
+        for (VegetableConf vegetableConf : allVegetableConfs) {
+            JLabel label = new JLabel(vegetableConf.getName());
             label.addMouseListener(new DragAndDropListener());
             add(label);
         }

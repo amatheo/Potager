@@ -8,7 +8,7 @@ public class GardenConfiguration {
     String name;
     int height;
     int width;
-    ArrayList<Vegetable> vegetables;
+    ArrayList<VegetableConf> vegetable;
     Simulation simulation;
 
     @JsonProperty("name")
@@ -31,8 +31,8 @@ public class GardenConfiguration {
         return this.simulation;
     }
 
-    @JsonProperty("vegetables")
-    public ArrayList<Vegetable> getVegetables() {
-        return this.vegetables;
+    @JsonProperty("vegetableConfs")
+    public ArrayList<VegetableConf> getVegetables() {
+        return this.vegetable;
     }
 }

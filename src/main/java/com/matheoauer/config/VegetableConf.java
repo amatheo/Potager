@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
 
-public class Vegetable {
+public class VegetableConf {
     ArrayList<Double> stage;
     Requirement requirement;
     String name;
