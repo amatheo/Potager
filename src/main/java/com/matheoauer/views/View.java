@@ -67,6 +67,7 @@ public class View extends JFrame implements Observer {
         }
         pan.setBorder(blackline);
         add(pan);
+        add(new FooterView(), BorderLayout.SOUTH);
     }
 
     @Override
