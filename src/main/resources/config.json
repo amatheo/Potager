@@ -4,7 +4,7 @@
   "width": 10,
   "simulation": {
     "time_sleep": 500,
-    "time_multiplier": 1
+    "time_multiplier": 172800
   },
   "vegetables": [
     {
