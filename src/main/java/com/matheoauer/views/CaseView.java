@@ -1,5 +1,7 @@
 package com.matheoauer.views;
 
+import com.matheoauer.SpriteEnum;
+import com.matheoauer.config.GardenConfigLoader;
 import com.matheoauer.models.Case;
 
 import javax.swing.*;
@@ -10,10 +12,10 @@ import java.util.logging.Logger;
 
 public class CaseView extends JLabel implements Observer {
 
-    private final Image iconImage;
     private final int i;
     private final int j;
     public JLabel label;
+    private Image iconImage;
 
     public CaseView(Image image, int i, int j) {
         super("", JLabel.CENTER);
@@ -31,6 +33,9 @@ public class CaseView extends JLabel implements Observer {
             Logger.getGlobal().warning("The object is not a case");
             return;
         }
+        String vegName = caseModel.getVegetable().getName();
+        SpriteEnum spriteEnum = SpriteEnum.valueOf(vegName.toUpperCase());
+        this.iconImage = GardenConfigLoader.getInstance().getAtlasLoader().getSpriteImage(spriteEnum.getAtlasIndex());
 
         if (caseModel.getSoil() != null) {
             updateBackground(caseModel.getSoil().getHumidity());
@@ -38,6 +43,7 @@ public class CaseView extends JLabel implements Observer {
         if (caseModel.getVegetable() != null) {
             updateIcon(caseModel.getVegetable().getGrowth());
         }
+
     }
 
     /**
