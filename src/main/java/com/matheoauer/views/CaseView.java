@@ -18,7 +18,7 @@ public class CaseView extends JLabel implements Observer {
     public CaseView(Image image, int i, int j) {
         super("", JLabel.CENTER);
         this.iconImage = image;
-        this.i = j;
+        this.i = i;
         this.j = j;
         this.label = new JLabel();
         this.add(label);

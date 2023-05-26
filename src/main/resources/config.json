@@ -20,6 +20,14 @@
     {
       "name": "Corn",
       "grow_rate": 0.05
+    },
+    {
+      "name": "Apple",
+      "grow_rate": 0.1
+    },
+    {
+      "name": "Cucumber",
+      "grow_rate": 0.01
     }
   ]
 }

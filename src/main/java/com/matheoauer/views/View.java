@@ -4,6 +4,7 @@ import com.matheoauer.SpriteEnum;
 import com.matheoauer.config.GardenConfigLoader;
 import com.matheoauer.models.Case;
 import com.matheoauer.models.Garden;
+import com.matheoauer.models.Vegetable;
 import com.matheoauer.views.adapter.CaseMouseAdapter;
 
 import javax.swing.*;
@@ -19,10 +20,12 @@ public class View extends JFrame implements Observer {
 
     private final int height;
     private final int width;
-
     private final CaseView[][] caseViews;
+    private Vegetable vegetableSelected;
+    private Garden garden;
 
     public View(Garden garden) {
+        this.garden = garden;
         this.height = GardenConfigLoader.getInstance().getGardenConfiguration().getHeight();
         this.width = GardenConfigLoader.getInstance().getGardenConfiguration().getWidth();
         this.caseViews = new CaseView[width][height];
@@ -58,7 +61,7 @@ public class View extends JFrame implements Observer {
                 CaseView caseView = new CaseView(iconImage, i, j);
                 caseModel.addObserver(caseView);
 
-                caseView.addMouseListener(new CaseMouseAdapter(caseView));
+                caseView.addMouseListener(new CaseMouseAdapter(caseView, this));
                 caseView.setBorder(blackline);
 
                 caseViews[i][j] = caseView;
@@ -67,7 +70,19 @@ public class View extends JFrame implements Observer {
         }
         pan.setBorder(blackline);
         add(pan);
-        add(new FooterView(), BorderLayout.SOUTH);
+        add(new FooterView(this), BorderLayout.SOUTH);
+    }
+
+    public void setVegetableSelected(Vegetable vegetableSelected) {
+        this.vegetableSelected = vegetableSelected;
+    }
+
+    public Vegetable getVegetableSelected() {
+        return vegetableSelected;
+    }
+
+    public Garden getGarden() {
+        return garden;
     }
 
     @Override
