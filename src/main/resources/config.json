@@ -9,7 +9,13 @@
   "vegetables": [
     {
       "name": "Eggplant",
-      "grow_rate": 0.025
+      "grow_rate": 0.025,
+      "stage": [
+        0.3
+      ],
+      "requirement": {
+        "humidity": 0.02
+      }
     },
     {
       "name": "Corn",
