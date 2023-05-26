@@ -8,7 +8,7 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.logging.Logger;
 
-public class CaseView extends JPanel implements Observer {
+public class CaseView extends JLabel implements Observer {
 
     private final Image iconImage;
     private final int i;
@@ -16,12 +16,13 @@ public class CaseView extends JPanel implements Observer {
     public JLabel label;
 
     public CaseView(Image image, int i, int j) {
-        super();
+        super("", JLabel.CENTER);
         this.iconImage = image;
         this.i = j;
         this.j = j;
         this.label = new JLabel();
         this.add(label);
+        this.setOpaque(true);
     }
 
     @Override
@@ -51,7 +52,7 @@ public class CaseView extends JPanel implements Observer {
         }
         int alpha = (int) (humidity * 255);
         Color color = new Color(139, 69, 19, alpha);
-        //this.setBackground(color);
+        this.setBackground(color);
     }
 
     /**
@@ -60,11 +61,15 @@ public class CaseView extends JPanel implements Observer {
      * @param growth the growth of the vegetable. Between 0 and 1.
      */
     private void updateIcon(float growth) {
+        if (iconImage == null) {
+            Logger.getGlobal().warning("The icon image is null");
+            return;
+        }
         if (growth < 0 || growth > 1) {
             throw new IllegalArgumentException("The growth must be between 0 and 1");
         }
         if (growth == 0) {
-            this.label.setIcon(null);
+            this.setIcon(null);
             return;
         }
 
@@ -72,10 +77,10 @@ public class CaseView extends JPanel implements Observer {
         int width = (int) (growth * this.getWidth());
         if (width <= 0 || height <= 0) {
             Logger.getGlobal().warning("The width or the height is too small to be displayed, 0 instead");
-            this.label.setIcon(null);
+            this.setIcon(null);
             return;
         }
-        this.label.setIcon(new ImageIcon(iconImage.getScaledInstance(width, height, 0)));
+        this.setIcon(new ImageIcon(iconImage.getScaledInstance(width, height, 0)));
     }
 
     public int getI() {

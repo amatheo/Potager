@@ -50,8 +50,11 @@ public class View extends JFrame implements Observer {
             for (int j = 0; j < height; j++) {
 
                 Case caseModel = garden.getCase(i, j);
-
-                Image iconImage = GardenConfigLoader.getInstance().getAtlasLoader().getSpriteImage(SpriteEnum.APPLE.getAtlasIndex());
+                Image iconImage = null;
+                if (caseModel.getVegetable() != null) {
+                    SpriteEnum spriteEnum = SpriteEnum.valueOf(caseModel.getVegetable().getName().toUpperCase());
+                    iconImage = GardenConfigLoader.getInstance().getAtlasLoader().getSpriteImage(spriteEnum.getAtlasIndex());
+                }
                 CaseView caseView = new CaseView(iconImage, i, j);
                 caseModel.addObserver(caseView);
 

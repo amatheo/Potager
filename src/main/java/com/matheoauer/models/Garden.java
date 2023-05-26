@@ -5,11 +5,13 @@ public class Garden {
     private final int width;
     private final int height;
     private final Case[][] cases;
+    private final Weather weather;
 
     public Garden(int width, int height) {
         this.width = width;
         this.height = height;
-        cases = new Case[width][height];
+        this.cases = new Case[width][height];
+        this.weather = new Weather(0.5f, 20f, 0.5f);
 
         this.build();
     }
@@ -18,16 +20,26 @@ public class Garden {
         for (int i = 0; i < cases.length; i++) {
             for (int j = 0; j < cases[0].length; j++) {
                 Soil defaultSoil = new Soil(0.2f);
-                Vegetable defaultVegetable = new Vegetable("Corn", 0.4f, 0f);
+                Vegetable defaultVegetable = new Vegetable("corn", 0.4f, 0f);
                 setCase(i, j, new Case(i, j, defaultVegetable, defaultSoil));
             }
         }
     }
 
+    /**
+     * Get the width of the garden
+     *
+     * @return the width of the garden
+     */
     public int getWidth() {
         return width;
     }
 
+    /**
+     * Get the height of the garden
+     *
+     * @return the height of the garden
+     */
     public int getHeight() {
         return height;
     }
@@ -62,5 +74,14 @@ public class Garden {
             throw new IllegalArgumentException("The case is outside the potager");
         }
         return cases[x][y];
+    }
+
+    /**
+     * Get the weather of the garden
+     *
+     * @return the weather of the garden
+     */
+    public Weather getWeather() {
+        return weather;
     }
 }

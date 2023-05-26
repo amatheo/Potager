@@ -5,6 +5,7 @@ import com.matheoauer.config.sprite.AtlasLoader;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 import static java.lang.System.Logger.Level;
 
@@ -58,5 +59,9 @@ public class GardenConfigLoader {
         }
         LOGGER.log(Level.ERROR, "No vegetable found for name " + name);
         return null;
+    }
+
+    public List<Vegetable> getVegetables() {
+        return getGardenConfiguration().getVegetables();
     }
 }

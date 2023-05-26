@@ -3,7 +3,7 @@
   "height": 10,
   "width": 10,
   "simulation": {
-    "time_sleep": 3000,
+    "time_sleep": 500,
     "time_multiplier": 1
   },
   "vegetables": [
@@ -12,7 +12,7 @@
       "grow_rate": 0.025
     },
     {
-      "name": "Celery",
+      "name": "Corn",
       "grow_rate": 0.05
     }
   ]

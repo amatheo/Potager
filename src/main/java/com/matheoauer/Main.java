@@ -4,7 +4,6 @@ import com.matheoauer.config.GardenConfigLoader;
 import com.matheoauer.models.Garden;
 import com.matheoauer.runnables.GrowthSimulator;
 import com.matheoauer.runnables.Scheduler;
-import com.matheoauer.runnables.SoilWatering;
 import com.matheoauer.views.View;
 
 import javax.swing.*;
@@ -23,9 +22,9 @@ public class Main {
             View view = new View(garden);
 
             GrowthSimulator growthSimulator = new GrowthSimulator();
-            SoilWatering soilWatering = new SoilWatering();
+            //SoilWatering soilWatering = new SoilWatering();
             scheduler.addTask(growthSimulator);
-            scheduler.addTask(soilWatering);
+            //scheduler.addTask(soilWatering);
 
             view.setVisible(true);
             scheduler.start();
