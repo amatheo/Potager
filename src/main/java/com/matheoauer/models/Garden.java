@@ -15,12 +15,8 @@ public class Garden {
         this.width = width;
         this.height = height;
         this.cases = new Case[width][height];
-<<<<<<< Updated upstream
-        this.weather = new Weather(0.5f, 20f, 0.5f);
         this.inventory = new Inventory();
-=======
         this.weather = new Weather();
->>>>>>> Stashed changes
 
         this.build();
     }
