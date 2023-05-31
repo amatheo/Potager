@@ -5,7 +5,7 @@ import com.matheoauer.views.CaseView;
 import com.matheoauer.views.View;
 
 import java.awt.event.MouseAdapter;
-import java.util.logging.Logger;
+import java.awt.event.MouseEvent;
 
 public class CaseMouseAdapter extends MouseAdapter {
 
@@ -18,9 +18,8 @@ public class CaseMouseAdapter extends MouseAdapter {
     }
 
     @Override
-    public void mouseClicked(java.awt.event.MouseEvent evt) {
-        Logger.getGlobal().info("Mouse clicked on case " + caseView.getI() + " " + caseView.getJ());
-        if (this.viewParent.getVegetableSelected() != null){
+    public void mouseClicked(MouseEvent evt) {
+        if (this.viewParent.getVegetableSelected() != null) {
             Case myCase = this.viewParent.getGarden().getCase(this.caseView.getI(), this.caseView.getJ());
             myCase.setVegetable(this.viewParent.getVegetableSelected());
             this.viewParent.setVegetableSelected(null);

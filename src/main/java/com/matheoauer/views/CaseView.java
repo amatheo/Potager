@@ -82,7 +82,6 @@ public class CaseView extends JLabel implements Observer {
         int height = (int) (growth * this.getHeight());
         int width = (int) (growth * this.getWidth());
         if (width <= 0 || height <= 0) {
-            Logger.getGlobal().warning("The width or the height is too small to be displayed, 0 instead");
             this.setIcon(null);
             return;
         }
