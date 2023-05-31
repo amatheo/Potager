@@ -1,5 +1,8 @@
 package com.matheoauer.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Garden {
 
     private final int width;
@@ -12,8 +15,12 @@ public class Garden {
         this.width = width;
         this.height = height;
         this.cases = new Case[width][height];
+<<<<<<< Updated upstream
         this.weather = new Weather(0.5f, 20f, 0.5f);
         this.inventory = new Inventory();
+=======
+        this.weather = new Weather();
+>>>>>>> Stashed changes
 
         this.build();
     }
@@ -21,7 +28,7 @@ public class Garden {
     private void build() {
         for (int i = 0; i < cases.length; i++) {
             for (int j = 0; j < cases[0].length; j++) {
-                Soil defaultSoil = new Soil(1f);
+                Soil defaultSoil = new Soil(0.70f);
                 Vegetable defaultVegetable = new Vegetable("corn", 0.4f, 0f);
                 setCase(i, j, new Case(i, j, defaultVegetable, defaultSoil));
             }
@@ -76,6 +83,31 @@ public class Garden {
             throw new IllegalArgumentException("The case is outside the potager");
         }
         return cases[x][y];
+    }
+
+    /**
+     * Get the neighbors of the case at the given position
+     * <p>Make a cross pattern</p>
+     *
+     * @param x the x position
+     * @param y the y position
+     * @return the neighbors of the case at the given position
+     */
+    public List<Case> getNeighbors(int x, int y) {
+        List<Case> neighbors = new ArrayList<>();
+        if (x > 0) {
+            neighbors.add(getCase(x - 1, y));
+        }
+        if (x < getWidth() - 1) {
+            neighbors.add(getCase(x + 1, y));
+        }
+        if (y > 0) {
+            neighbors.add(getCase(x, y - 1));
+        }
+        if (y < getHeight() - 1) {
+            neighbors.add(getCase(x, y + 1));
+        }
+        return neighbors;
     }
 
     /**

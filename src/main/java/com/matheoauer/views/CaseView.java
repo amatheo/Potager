@@ -60,8 +60,18 @@ public class CaseView extends JLabel implements Observer {
         if (humidity < 0 || humidity > 1) {
             throw new IllegalArgumentException("The humidity must be between 0 and 1");
         }
+        // Invert the humidity to have a brown color when the humidity is high
+        humidity = 1 - humidity;
         int alpha = (int) (humidity * 255);
         Color color = new Color(139, 69, 19, alpha);
+
+        // Blend the color with the background color white
+        Color backgroundColor = Color.WHITE;
+        int red = (color.getRed() + backgroundColor.getRed()) / 2;
+        int green = (color.getGreen() + backgroundColor.getGreen()) / 2;
+        int blue = (color.getBlue() + backgroundColor.getBlue()) / 2;
+        color = new Color(red, green, blue, alpha);
+        
         this.setBackground(color);
     }
 

@@ -4,15 +4,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Simulation {
     double time_sleep;
-    int time_multiplier;
+    float daysToSimulate;
 
     @JsonProperty("time_sleep")
     public double getTime_sleep() {
         return this.time_sleep;
     }
 
-    @JsonProperty("time_multiplier")
-    public int getTime_multiplier() {
-        return this.time_multiplier;
+    @JsonProperty("daysToSimulate")
+    public float getDaysToSimulate() {
+        return this.daysToSimulate;
     }
 }

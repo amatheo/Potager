@@ -3,31 +3,49 @@
   "height": 10,
   "width": 10,
   "simulation": {
-    "time_sleep": 500,
-    "time_multiplier": 172800
+    "time_sleep": 1000,
+    "daysToSimulate": 1
   },
   "vegetables": [
     {
       "name": "Eggplant",
       "grow_rate": 0.025,
-      "stage": [
-        0.3
-      ],
+      "humidity_consumption": 0.015,
       "requirement": {
-        "humidity": 0.02
+        "humidity": 0.002,
+        "temperatureMin": -12,
+        "temperatureMax": 60
       }
     },
     {
       "name": "Corn",
-      "grow_rate": 0.05
+      "grow_rate": 0.05,
+      "humidity_consumption": 0.015,
+      "requirement": {
+        "humidity": 0.085,
+        "temperatureMin": -12,
+        "temperatureMax": 60
+      }
     },
     {
       "name": "Apple",
-      "grow_rate": 0.1
+      "grow_rate": 0.1,
+      "humidity_consumption": 0.015,
+      "requirement": {
+        "humidity": 0.002,
+        "temperatureMin": -12,
+        "temperatureMax": 60
+      }
     },
     {
       "name": "Cucumber",
-      "grow_rate": 0.01
+      "grow_rate": 0.01,
+      "humidity_consumption": 0.015,
+      "requirement": {
+        "humidity": 0.002,
+        "temperatureMin": -12,
+        "temperatureMax": 60
+      }
     }
   ]
 }

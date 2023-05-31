@@ -2,35 +2,28 @@ package com.matheoauer.runnables;
 
 import com.matheoauer.models.Case;
 
+import java.util.List;
+
 public class SoilWatering extends Simulator {
 
 
     @Override
     public void run() {
-        // Distribute the water of the soil to the surrounding cases depending on the distance and difference of humidity
-
         for (int i = 0; i < this.garden.getWidth(); i++) {
             for (int j = 0; j < this.garden.getHeight(); j++) {
                 Case c = this.garden.getCase(i, j);
+                // Share the humidity with the neighbors and decrease the humidity of the current case
                 float humidity = c.getSoil().getHumidity();
-                float humidityToDistribute = humidity / 4;
 
-                // Distribute the water to the surrounding cases
-                if (i > 0) {
-                    this.garden.getCase(i - 1, j).getSoil().increaseHumidity(humidityToDistribute);
-                }
-                if (i < this.garden.getWidth() - 1) {
-                    this.garden.getCase(i + 1, j).getSoil().increaseHumidity(humidityToDistribute);
-                }
-                if (j > 0) {
-                    this.garden.getCase(i, j - 1).getSoil().increaseHumidity(humidityToDistribute);
-                }
-                if (j < this.garden.getHeight() - 1) {
-                    this.garden.getCase(i, j + 1).getSoil().increaseHumidity(humidityToDistribute);
-                }
+                float humidityDecrease = humidity * 0.1f;
+                float humidityShare = (humidityDecrease * 0.7f) / 4;
 
-                // Decrease the humidity of the soil
-                c.getSoil().decreaseHumidity(humidity / 2);
+                // Get the neighbors cases and increase their humidity
+                List<Case> neighbors = this.garden.getNeighbors(i, j);
+                for (Case neighbor : neighbors) {
+                    neighbor.getSoil().increaseHumidity(humidityShare);
+                }
+                c.getSoil().decreaseHumidity(humidityDecrease);
             }
         }
     }

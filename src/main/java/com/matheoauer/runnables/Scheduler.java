@@ -13,25 +13,29 @@ public class Scheduler extends Observable implements Runnable {
     private static Scheduler instance;
     private final Date oldDate;
     private final long sleepTimeMs;
+    private final float daysToSimulate;
     System.Logger LOGGER = System.getLogger("Scheduler");
     List<Simulator> tasks;
     private Date date;
     private Garden garden;
-    private int timeMulti;
 
-    private Scheduler(Date startDate, long sleepTimeMs, int timeMulti) {
+    private Scheduler(Date startDate, long sleepTimeMs, float daysToSimulate) {
+        // Warning if the daysToSimulate is inferior to an hour
+        if (daysToSimulate < 1f / 24f) {
+            LOGGER.log(System.Logger.Level.WARNING, "The simulation is too short, you should increase the daysToSimulate");
+        }
         this.date = startDate;
         this.oldDate = startDate;
         this.tasks = new ArrayList<>();
         this.sleepTimeMs = sleepTimeMs;
-        this.timeMulti = timeMulti;
+        this.daysToSimulate = daysToSimulate;
     }
 
     public static Scheduler getInstance() {
         if (instance == null) {
             long sleepTimeMs = (long) GardenConfigLoader.getInstance().getGardenConfiguration().getSimulation().getTime_sleep();
-            int timeMulti = GardenConfigLoader.getInstance().getGardenConfiguration().getSimulation().getTime_multiplier();
-            instance = new Scheduler(new Date(), sleepTimeMs, timeMulti);
+            float daysToSimulate = GardenConfigLoader.getInstance().getGardenConfiguration().getSimulation().getDaysToSimulate();
+            instance = new Scheduler(new Date(), sleepTimeMs, daysToSimulate);
         }
         return instance;
     }
@@ -48,10 +52,6 @@ public class Scheduler extends Observable implements Runnable {
         tasks.remove(task);
     }
 
-    public void setTimeMulti(int timeMulti) {
-        this.timeMulti = timeMulti;
-    }
-
     public Date getDate() {
         return date;
     }
@@ -66,8 +66,10 @@ public class Scheduler extends Observable implements Runnable {
         while (true) {
             // Update timings
             oldDate.setTime(date.getTime());
-            date = new Date((oldDate.getTime() + (sleepTimeMs * timeMulti)));
 
+            // Calculate deltatime
+            long futureTime = (long) (sleepTimeMs + (daysToSimulate * 24 * 60 * 60 * 1000));
+            date = new Date((oldDate.getTime() + futureTime));
             for (Simulator task : tasks) {
                 task.simulate(date);
             }

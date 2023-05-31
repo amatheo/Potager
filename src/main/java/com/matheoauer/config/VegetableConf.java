@@ -9,6 +9,7 @@ public class VegetableConf {
     Requirement requirement;
     String name;
     double growRate;
+    double humidityConsumption;
 
     @JsonProperty("name")
     public String getName() {
@@ -34,5 +35,10 @@ public class VegetableConf {
     @JsonProperty("stage")
     public ArrayList<Double> getStage() {
         return this.stage;
+    }
+
+    @JsonProperty("humidity_consumption")
+    public double getHumidityConsumption() {
+        return this.humidityConsumption;
     }
 }
