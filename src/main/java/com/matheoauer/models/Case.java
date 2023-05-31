@@ -44,9 +44,11 @@ public class Case extends Observable implements Observer {
         if (this.vegetable != null) {
             this.vegetable.deleteObserver(this);
         }
-        vegetable.addObserver(this);
         this.vegetable = vegetable;
-        this.vegetable.setPlantedAt(Scheduler.getInstance().getDate());
+        if (vegetable != null) {
+            this.vegetable.addObserver(this);
+            this.vegetable.setPlantedAt(Scheduler.getInstance().getDate());
+        }
         this.setChanged();
         this.notifyObservers();
     }

@@ -8,11 +8,16 @@ import com.matheoauer.models.Vegetable;
 import com.matheoauer.runnables.Scheduler;
 import com.matheoauer.views.adapter.CaseMouseAdapter;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.net.URL;
 import java.util.Date;
 import java.util.Observable;
 import java.util.Observer;
@@ -47,6 +52,17 @@ public class View extends JFrame implements Observer {
         this.setSize(800, 600);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        try {
+            URL resource = getClass().getClassLoader().getResource("ambiant_music.wav");
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(resource.toURI()));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+            clip.start();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
         JComponent pan = new JPanel(new GridLayout(width, height));
 
         Border blackline = BorderFactory.createLineBorder(Color.black, 1);
@@ -70,9 +86,14 @@ public class View extends JFrame implements Observer {
                 pan.add(caseView);
             }
         }
+
+        InventoryView inventoryView = new InventoryView(garden.getInventory().getInventory().keySet());
+        garden.getInventory().addObserver(inventoryView);
+
         pan.setBorder(blackline);
         add(pan);
         add(new FooterView(this), BorderLayout.SOUTH);
+        add(inventoryView, BorderLayout.EAST);
     }
 
     public void setVegetableSelected(Vegetable vegetableSelected) {

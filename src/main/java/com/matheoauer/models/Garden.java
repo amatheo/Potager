@@ -6,12 +6,14 @@ public class Garden {
     private final int height;
     private final Case[][] cases;
     private final Weather weather;
+    private final Inventory inventory;
 
     public Garden(int width, int height) {
         this.width = width;
         this.height = height;
         this.cases = new Case[width][height];
         this.weather = new Weather(0.5f, 20f, 0.5f);
+        this.inventory = new Inventory();
 
         this.build();
     }
@@ -83,5 +85,14 @@ public class Garden {
      */
     public Weather getWeather() {
         return weather;
+    }
+
+    /**
+     * Get the inventory
+     *
+     * @return the inventory
+     */
+    public Inventory getInventory() {
+        return inventory;
     }
 }
