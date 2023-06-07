@@ -9,6 +9,7 @@ public class GardenConfiguration {
     int height;
     int width;
     float decayProbability;
+    float decayAmount;
 
     ArrayList<VegetableConf> vegetables;
     Simulation simulation;
@@ -31,6 +32,11 @@ public class GardenConfiguration {
     @JsonProperty("decayProbability")
     public float getDecayProbability() {
         return decayProbability;
+    }
+
+    @JsonProperty("decayAmount")
+    public float getDecayAmount() {
+        return decayAmount;
     }
 
     @JsonProperty("simulation")
