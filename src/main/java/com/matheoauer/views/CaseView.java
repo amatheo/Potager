@@ -6,6 +6,7 @@ import com.matheoauer.models.Case;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.logging.Logger;
@@ -14,13 +15,17 @@ public class CaseView extends JLabel implements Observer {
 
     private final int i;
     private final int j;
+    public JLabel label;
     private Image iconImage;
+    private int alpha;
 
     public CaseView(Image image, int i, int j) {
         super("", JLabel.CENTER);
         this.iconImage = image;
         this.i = i;
         this.j = j;
+        this.label = new JLabel();
+        this.add(label);
         this.setOpaque(true);
     }
 
@@ -32,12 +37,12 @@ public class CaseView extends JLabel implements Observer {
         }
         if (caseModel.getVegetable() == null) {
             this.iconImage = null;
-            updateIcon(0);
+            updateIcon(0, 0);
         } else {
             String vegName = caseModel.getVegetable().getName();
             SpriteEnum spriteEnum = SpriteEnum.valueOf(vegName.toUpperCase());
             this.iconImage = GardenConfigLoader.getInstance().getAtlasLoader().getSpriteImage(spriteEnum.getAtlasIndex());
-            updateIcon(caseModel.getVegetable().getGrowth());
+            updateIcon(caseModel.getVegetable().getGrowth(), caseModel.getVegetable().getDecay());
         }
 
         if (caseModel.getSoil() != null) {
@@ -74,7 +79,7 @@ public class CaseView extends JLabel implements Observer {
      *
      * @param growth the growth of the vegetable. Between 0 and 1.
      */
-    private void updateIcon(float growth) {
+    private void updateIcon(float growth, float decay) {
         if (iconImage == null) {
             this.setIcon(null);
             return;
@@ -93,7 +98,32 @@ public class CaseView extends JLabel implements Observer {
             this.setIcon(null);
             return;
         }
-        this.setIcon(new ImageIcon(iconImage.getScaledInstance(width, height, 0)));
+
+        BufferedImage baseImage = new BufferedImage(iconImage.getWidth(null), iconImage.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = baseImage.createGraphics();
+        g2d.drawImage(iconImage, 0, 0, null);
+        g2d.dispose();
+
+        for (int y = 0; y < baseImage.getHeight(); y++) {
+            for (int x = 0; x < baseImage.getWidth(); x++) {
+                int rgb = baseImage.getRGB(x, y);
+
+                int alpha = (rgb >> 24) & 0xFF; // Composante de transparence
+                int red = (rgb >> 16) & 0xFF; // Composante rouge
+                int green = (rgb >> 8) & 0xFF; // Composante verte
+                int blue = rgb & 0xFF; // Composante bleue
+
+                // Mélange des composantes rouge et bleue pour créer du violet
+                red = (int) (red * (1 - decay));
+                blue = (int) (blue * (1 - decay));
+                
+                int newRGB = (alpha << 24) | (red << 16) | (green << 8) | blue;
+                baseImage.setRGB(x, y, newRGB);
+            }
+        }
+
+        Image filteredImage = baseImage.getScaledInstance(width, height, Image.SCALE_DEFAULT);
+        this.setIcon(new ImageIcon(filteredImage));
     }
 
     public int getI() {
@@ -103,4 +133,5 @@ public class CaseView extends JLabel implements Observer {
     public int getJ() {
         return j;
     }
+
 }

@@ -2,6 +2,7 @@
   "name": "Garden",
   "height": 10,
   "width": 10,
+  "decayProbability": 0.003,
   "simulation": {
     "time_sleep": 1000,
     "daysToSimulate": 1

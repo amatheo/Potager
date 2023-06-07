@@ -24,14 +24,12 @@ public class GardenConfigLoader {
         InputStream is = classloader.getResourceAsStream(CONFIG_FILENAME);
         try (
                 InputStream atlasIs = classloader.getResourceAsStream(ATLAS_FILENAME)
-
         ) {
             this.gardenConfiguration = mapper.readValue(is, GardenConfiguration.class);
             atlasLoader = new AtlasLoader(atlasIs, 32, 32, 2);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
 
     }
 

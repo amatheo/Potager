@@ -24,8 +24,12 @@ public class Garden implements Serializable {
         for (int i = 0; i < cases.length; i++) {
             for (int j = 0; j < cases[0].length; j++) {
                 Soil defaultSoil = new Soil(0.70f);
-                Vegetable defaultVegetable = new Vegetable("corn", 0.4f, 0f);
-                setCase(i, j, new Case(i, j, defaultVegetable, defaultSoil));
+                // 33% chance to have a vegetable
+                Vegetable veg = null;
+                if (Math.random() < 0.33) {
+                    veg = new Vegetable("corn", 0.4f, 0f);
+                }
+                setCase(i, j, new Case(i, j, veg, defaultSoil));
             }
         }
     }

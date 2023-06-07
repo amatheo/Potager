@@ -3,10 +3,7 @@ package com.matheoauer;
 import com.matheoauer.config.GardenConfigLoader;
 import com.matheoauer.models.Case;
 import com.matheoauer.models.Garden;
-import com.matheoauer.runnables.GrowthSimulator;
-import com.matheoauer.runnables.Scheduler;
-import com.matheoauer.runnables.SoilWatering;
-import com.matheoauer.runnables.WeatherSimulator;
+import com.matheoauer.runnables.*;
 import com.matheoauer.views.View;
 
 import javax.swing.*;
@@ -45,7 +42,6 @@ public class Main {
                 fichierEntree.close();
 
             } catch (Exception ignored) {
-                ignored.printStackTrace();
                 garden.build();
             }
 
@@ -58,9 +54,12 @@ public class Main {
             GrowthSimulator growthSimulator = new GrowthSimulator();
             WeatherSimulator weatherSimulator = new WeatherSimulator();
             SoilWatering soilWatering = new SoilWatering();
+            DecaySim decaySim = new DecaySim();
+            
             scheduler.addTask(weatherSimulator);
             scheduler.addTask(growthSimulator);
             scheduler.addTask(soilWatering);
+            scheduler.addTask(decaySim);
 
             view.setVisible(true);
             scheduler.start();

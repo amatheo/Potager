@@ -77,10 +77,19 @@ public class Vegetable extends Observable implements Serializable {
         this.notifyObservers();
     }
 
-    public void decay(float decay) {
+    public void increaseDecay(float decay) {
         this.decay += decay;
         if (this.decay > 1) {
             this.decay = 1;
+        }
+        this.setChanged();
+        this.notifyObservers();
+    }
+
+    public void decreaseDecay(float decay) {
+        this.decay -= decay;
+        if (this.decay < 0) {
+            this.decay = 0;
         }
         this.setChanged();
         this.notifyObservers();

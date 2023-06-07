@@ -89,5 +89,8 @@ public class GrowthSimulator extends Simulator {
             consumptionPerHour *= growthRateMulti;
             c.getSoil().decreaseHumidity((float) consumptionPerHour);
         }
+        if (c.getVegetable().getDecay() > 0.75) {
+            c.setVegetable(null);
+        }
     }
 }
