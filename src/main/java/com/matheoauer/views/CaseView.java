@@ -30,7 +30,6 @@ public class CaseView extends JLabel implements Observer {
             Logger.getGlobal().warning("The object is not a case");
             return;
         }
-        Logger.getGlobal().info("Update case view " + caseModel.getX() + " | " + caseModel.getY());
         if (caseModel.getVegetable() == null) {
             this.iconImage = null;
             updateIcon(0);
