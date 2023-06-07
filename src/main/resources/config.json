@@ -52,6 +52,39 @@
         "temperatureMin": -12,
         "temperatureMax": 60
       }
+    },
+    {
+      "name": "Watermelon",
+      "price": 15,
+      "grow_rate": 0.07,
+      "humidity_consumption": 0.040,
+      "requirement": {
+        "humidity": 0.002,
+        "temperatureMin": -12,
+        "temperatureMax": 60
+      }
+    },
+    {
+      "name": "Banana",
+      "price": 2,
+      "grow_rate": 0.03,
+      "humidity_consumption": 0.040,
+      "requirement": {
+        "humidity": 0.002,
+        "temperatureMin": -12,
+        "temperatureMax": 60
+      }
+    },
+    {
+      "name": "Strawberry",
+      "price": 2,
+      "grow_rate": 0.03,
+      "humidity_consumption": 0.040,
+      "requirement": {
+        "humidity": 0.002,
+        "temperatureMin": -12,
+        "temperatureMax": 60
+      }
     }
   ]
 }

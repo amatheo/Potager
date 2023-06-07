@@ -39,6 +39,15 @@ public class CaseMouseAdapter extends MouseAdapter {
             }
         } else if (myCase.getVegetable() != null && myCase.getVegetable().getGrowth() == 1) {
             viewParent.getGarden().getInventory().addToInventory(myCase.getVegetable().getName());
+            try {
+                URL resource = getClass().getClassLoader().getResource("claimed_vegetable_sound.wav");
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(resource.toURI()));
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInputStream);
+                clip.start();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
             myCase.setVegetable(null);
         }
     }

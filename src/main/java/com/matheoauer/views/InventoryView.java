@@ -4,13 +4,8 @@ import com.matheoauer.SpriteEnum;
 import com.matheoauer.config.GardenConfigLoader;
 import com.matheoauer.models.Inventory;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Observable;
@@ -50,15 +45,6 @@ public class InventoryView extends JPanel implements Observer {
             JLabel label = this.inventory.get(vegetableName);
             if (label != null) {
                 label.setText("x" + inventory.getInventory().get(vegetableName));
-                try {
-                    URL resource = getClass().getClassLoader().getResource("claimed_vegetable_sound.wav");
-                    AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(resource.toURI()));
-                    Clip clip = AudioSystem.getClip();
-                    clip.open(audioInputStream);
-                    clip.start();
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
             }
         }
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
