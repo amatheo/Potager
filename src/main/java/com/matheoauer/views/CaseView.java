@@ -33,21 +33,19 @@ public class CaseView extends JLabel implements Observer {
             Logger.getGlobal().warning("The object is not a case");
             return;
         }
-        if (caseModel.getVegetable() == null){
+        if (caseModel.getVegetable() == null) {
             this.iconImage = null;
             updateIcon(0);
-            return;
+        } else {
+            String vegName = caseModel.getVegetable().getName();
+            SpriteEnum spriteEnum = SpriteEnum.valueOf(vegName.toUpperCase());
+            this.iconImage = GardenConfigLoader.getInstance().getAtlasLoader().getSpriteImage(spriteEnum.getAtlasIndex());
+            updateIcon(caseModel.getVegetable().getGrowth());
         }
-        String vegName = caseModel.getVegetable().getName();
-        SpriteEnum spriteEnum = SpriteEnum.valueOf(vegName.toUpperCase());
-        this.iconImage = GardenConfigLoader.getInstance().getAtlasLoader().getSpriteImage(spriteEnum.getAtlasIndex());
-
+        
         if (caseModel.getSoil() != null) {
             updateBackground(caseModel.getSoil().getHumidity());
         }
-
-        updateIcon(caseModel.getVegetable().getGrowth());
-
     }
 
     /**
@@ -66,12 +64,11 @@ public class CaseView extends JLabel implements Observer {
         Color color = new Color(139, 69, 19, alpha);
 
         // Blend the color with the background color white
-        Color backgroundColor = Color.WHITE;
-        int red = (color.getRed() + backgroundColor.getRed()) / 2;
-        int green = (color.getGreen() + backgroundColor.getGreen()) / 2;
-        int blue = (color.getBlue() + backgroundColor.getBlue()) / 2;
+        int red = (color.getRed());
+        int green = (color.getGreen());
+        int blue = (color.getBlue());
         color = new Color(red, green, blue, alpha);
-        
+
         this.setBackground(color);
     }
 
@@ -82,7 +79,7 @@ public class CaseView extends JLabel implements Observer {
      */
     private void updateIcon(float growth) {
         if (iconImage == null) {
-            this.setIcon(null );
+            this.setIcon(null);
             return;
         }
         if (growth < 0 || growth > 1) {

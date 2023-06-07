@@ -29,7 +29,7 @@ public class View extends JFrame implements Observer {
     private final int width;
     private final CaseView[][] caseViews;
     private Vegetable vegetableSelected;
-    private Garden garden;
+    private final Garden garden;
 
     public View(Garden garden) {
         this.garden = garden;
@@ -96,12 +96,12 @@ public class View extends JFrame implements Observer {
         add(inventoryView, BorderLayout.EAST);
     }
 
-    public void setVegetableSelected(Vegetable vegetableSelected) {
-        this.vegetableSelected = vegetableSelected;
-    }
-
     public Vegetable getVegetableSelected() {
         return vegetableSelected;
+    }
+
+    public void setVegetableSelected(Vegetable vegetableSelected) {
+        this.vegetableSelected = vegetableSelected;
     }
 
     public Garden getGarden() {

@@ -24,6 +24,11 @@ public class SoilWatering extends Simulator {
                     neighbor.getSoil().increaseHumidity(humidityShare);
                 }
                 c.getSoil().decreaseHumidity(humidityDecrease);
+
+                for (int k = 0; k < this.garden.getWeather().daySoilHumidity.length; k++) {
+                    float humidityHour = this.garden.getWeather().daySoilHumidity[k];
+                    c.getSoil().increaseHumidity(humidityHour / 24);
+                }
             }
         }
     }

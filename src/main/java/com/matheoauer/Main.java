@@ -28,7 +28,7 @@ public class Main {
             SoilWatering soilWatering = new SoilWatering();
             scheduler.addTask(weatherSimulator);
             scheduler.addTask(growthSimulator);
-            //scheduler.addTask(soilWatering);
+            scheduler.addTask(soilWatering);
 
             view.setVisible(true);
             scheduler.start();

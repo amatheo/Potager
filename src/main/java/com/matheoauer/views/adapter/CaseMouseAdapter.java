@@ -37,8 +37,7 @@ public class CaseMouseAdapter extends MouseAdapter {
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-        }
-        else if (myCase.getVegetable() != null && myCase.getVegetable().getGrowth() == 1){
+        } else if (myCase.getVegetable() != null && myCase.getVegetable().getGrowth() == 1) {
             viewParent.getGarden().getInventory().addToInventory(myCase.getVegetable().getName());
             myCase.setVegetable(null);
         }

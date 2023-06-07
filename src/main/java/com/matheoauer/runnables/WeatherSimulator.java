@@ -15,10 +15,14 @@ public class WeatherSimulator extends Simulator {
         // Example: Simulating the weather for 1 hour
 
         long deltaTime = Scheduler.getInstance().getDeltaTime();
-
+        float rainingDayProbability = 157f / 365f;
+        float rainingDay = (float) Math.random();
         for (int i = 0; i < 24; i++) {
             Date currentSimulate = new Date(oldDate.getTime() + (i * 1000 * 60 * 60));
             this.garden.getWeather().dayTemperature[i] = simulateWeather(currentSimulate);
+            float soilHumidity = 0f;
+            soilHumidity = this.getSoilHumidity(rainingDay < rainingDayProbability);
+            this.garden.getWeather().daySoilHumidity[i] = soilHumidity;
         }
 
     }
@@ -57,5 +61,19 @@ public class WeatherSimulator extends Simulator {
         temperature = temperature * (1.0f - bump) + 20.0f * bump;
 
         return temperature;
+    }
+
+    private float getSoilHumidity(boolean dayRaining) {
+        if (dayRaining) {
+            float rainingHourProbability = 0.5f;
+            float rainingHour = (float) Math.random();
+            if (rainingHour < rainingHourProbability) {
+                // It's raining
+                // Random humidity between 0.2 and 0.5
+                return (float) (Math.random() * 0.05f + 0.05f);
+            }
+        }
+        // Return a random humidity between 0.005 and 0.01
+        return (float) (Math.random() * 0.005f + 0.005f);
     }
 }
