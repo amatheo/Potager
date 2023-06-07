@@ -6,11 +6,11 @@ import java.util.List;
 
 public class Garden implements Serializable {
 
-    private final int width;
-    private final int height;
-    private final Case[][] cases;
-    private final Weather weather;
-    private final Inventory inventory;
+    public int width;
+    public int height;
+    public Case[][] cases;
+    public Weather weather;
+    public Inventory inventory;
 
     public Garden(int width, int height) {
         this.width = width;
@@ -18,11 +18,9 @@ public class Garden implements Serializable {
         this.cases = new Case[width][height];
         this.inventory = new Inventory();
         this.weather = new Weather();
-
-        this.build();
     }
 
-    private void build() {
+    public void build() {
         for (int i = 0; i < cases.length; i++) {
             for (int j = 0; j < cases[0].length; j++) {
                 Soil defaultSoil = new Soil(0.70f);

@@ -14,7 +14,6 @@ public class CaseView extends JLabel implements Observer {
 
     private final int i;
     private final int j;
-    public JLabel label;
     private Image iconImage;
 
     public CaseView(Image image, int i, int j) {
@@ -22,8 +21,6 @@ public class CaseView extends JLabel implements Observer {
         this.iconImage = image;
         this.i = i;
         this.j = j;
-        this.label = new JLabel();
-        this.add(label);
         this.setOpaque(true);
     }
 
@@ -33,6 +30,7 @@ public class CaseView extends JLabel implements Observer {
             Logger.getGlobal().warning("The object is not a case");
             return;
         }
+        Logger.getGlobal().info("Update case view " + caseModel.getX() + " | " + caseModel.getY());
         if (caseModel.getVegetable() == null) {
             this.iconImage = null;
             updateIcon(0);
@@ -42,7 +40,7 @@ public class CaseView extends JLabel implements Observer {
             this.iconImage = GardenConfigLoader.getInstance().getAtlasLoader().getSpriteImage(spriteEnum.getAtlasIndex());
             updateIcon(caseModel.getVegetable().getGrowth());
         }
-        
+
         if (caseModel.getSoil() != null) {
             updateBackground(caseModel.getSoil().getHumidity());
         }

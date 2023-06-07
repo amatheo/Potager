@@ -31,8 +31,8 @@ public class View extends JFrame implements Observer {
     private final int height;
     private final int width;
     private final CaseView[][] caseViews;
-    private Vegetable vegetableSelected;
     private final Garden garden;
+    private Vegetable vegetableSelected;
 
     public View(Garden garden) {
         this.garden = garden;
@@ -45,10 +45,9 @@ public class View extends JFrame implements Observer {
                 saveData();
             }
         });
-        this.build(garden);
     }
 
-    private void build(Garden garden) {
+    public void build(Garden garden) {
 
         this.setTitle("View");
         this.setSize(800, 600);
@@ -92,7 +91,6 @@ public class View extends JFrame implements Observer {
 
         InventoryView inventoryView = new InventoryView(garden.getInventory().getInventory());
         garden.getInventory().addObserver(inventoryView);
-
         pan.setBorder(blackline);
         add(pan);
         add(new FooterView(this), BorderLayout.SOUTH);
@@ -119,7 +117,7 @@ public class View extends JFrame implements Observer {
         }
     }
 
-    private void saveData(){
+    private void saveData() {
         try {
             // Création d'un flux d'entrée depuis le fichier
             FileOutputStream fichierSortie = new FileOutputStream(Main.pathUrl);

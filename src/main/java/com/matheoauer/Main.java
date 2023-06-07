@@ -1,6 +1,7 @@
 package com.matheoauer;
 
 import com.matheoauer.config.GardenConfigLoader;
+import com.matheoauer.models.Case;
 import com.matheoauer.models.Garden;
 import com.matheoauer.runnables.GrowthSimulator;
 import com.matheoauer.runnables.Scheduler;
@@ -11,10 +12,10 @@ import com.matheoauer.views.View;
 import javax.swing.*;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
-import java.util.HashMap;
 
 public class Main {
     public static final String pathUrl = "../../garden.save";
+
     public static void main(String[] args) {
 
         SwingUtilities.invokeLater(() -> {
@@ -29,17 +30,29 @@ public class Main {
                 ObjectInputStream objetEntree = new ObjectInputStream(fichierEntree);
 
                 // Lecture de la HashMap désérialisée à partir du fichier
-                garden = (Garden) objetEntree.readObject();
+                Garden g = (Garden) objetEntree.readObject();
+                garden.weather = g.weather;
+                garden.inventory = g.inventory;
+                for (int i = 0; i < g.getWidth(); i++) {
+                    for (int j = 0; j < g.getHeight(); j++) {
+                        Case c = new Case(g.getCase(i, j));
+                        garden.setCase(i, j, c);
+                    }
+                }
 
                 // Fermeture des flux
                 objetEntree.close();
                 fichierEntree.close();
 
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+                ignored.printStackTrace();
+                garden.build();
+            }
 
             Scheduler scheduler = Scheduler.getInstance();
             scheduler.setGarden(garden);
             View view = new View(garden);
+            view.build(garden);
             scheduler.addObserver(view);
 
             GrowthSimulator growthSimulator = new GrowthSimulator();

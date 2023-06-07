@@ -12,6 +12,14 @@ public class Case extends Observable implements Observer, Serializable {
     private Vegetable vegetable;
     private Soil soil;
 
+
+    public Case(Case c) {
+        this.x = c.x;
+        this.y = c.y;
+        this.setVegetable(c.getVegetable());
+        this.setSoil(c.getSoil());
+    }
+
     public Case(int x, int y) {
         this.x = x;
         this.y = y;
