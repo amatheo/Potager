@@ -113,7 +113,7 @@ public class View extends JFrame implements Observer {
     public void update(Observable o, Object arg) {
         if (o instanceof Scheduler scheduler) {
             Date date = scheduler.getDate();
-            String title = "Simulation Date - " + date + " Temp " + this.garden.weather.dayTemperature[date.getHours()];
+            String title = "Simulation Date - " + date + " Temp " + this.garden.getWeather().dayTemperature[date.getHours()];
             setTitle(title);
         }
     }

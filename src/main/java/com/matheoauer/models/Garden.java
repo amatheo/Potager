@@ -6,11 +6,11 @@ import java.util.List;
 
 public class Garden implements Serializable {
 
-    public int width;
-    public int height;
-    public Case[][] cases;
-    public Weather weather;
-    public Inventory inventory;
+    private int width;
+    private int height;
+    private Case[][] cases;
+    private Weather weather;
+    private Inventory inventory;
 
     public Garden(int width, int height) {
         this.width = width;
@@ -125,5 +125,13 @@ public class Garden implements Serializable {
      */
     public Inventory getInventory() {
         return inventory;
+    }
+
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
+    }
+
+    public void setWeather(Weather weather) {
+        this.weather = weather;
     }
 }

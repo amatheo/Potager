@@ -11,6 +11,7 @@ public class VegetableConf implements Serializable {
     String name;
     double growRate;
     double humidityConsumption;
+    double price;
 
     @JsonProperty("name")
     public String getName() {
@@ -41,5 +42,10 @@ public class VegetableConf implements Serializable {
     @JsonProperty("humidity_consumption")
     public double getHumidityConsumption() {
         return this.humidityConsumption;
+    }
+
+    @JsonProperty("price")
+    public double getPrice() {
+        return this.price;
     }
 }
