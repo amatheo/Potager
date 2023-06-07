@@ -11,20 +11,21 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.Set;
 import java.util.logging.Logger;
 
 public class InventoryView extends JPanel implements Observer {
 
     private final HashMap<String, JLabel> inventory;
+    private JLabel labelMoney = new JLabel("Argent : 0");
 
     public InventoryView(HashMap<String, Integer> inventory) {
         setBorder(BorderFactory.createEmptyBorder(0,0,0,5));
         this.inventory = new HashMap<>();
-        this.setLayout(new GridLayout(inventory.size(),1));
+        this.setLayout(new GridLayout(inventory.size() + 1,1));
 
         for (String vegetableName : inventory.keySet()) {
             JLabel label = new JLabel("x" + inventory.get(vegetableName));
@@ -34,6 +35,7 @@ public class InventoryView extends JPanel implements Observer {
             this.inventory.put(vegetableName, label);
             add(label);
         }
+        add(labelMoney);
     }
 
     @Override
@@ -58,6 +60,8 @@ public class InventoryView extends JPanel implements Observer {
                 }
             }
         }
-
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        String formattedNumber = decimalFormat.format(inventory.getMoney());
+        labelMoney.setText("Argent : " + formattedNumber + "€");
     }
 }

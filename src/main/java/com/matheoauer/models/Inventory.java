@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 
 public class Inventory extends Observable implements Serializable {
     private HashMap<String, Integer> inventory;
+    private double money;
 
     public Inventory(){
         List<VegetableConf> allVegetableConfs = GardenConfigLoader.getInstance().getVegetables();
@@ -18,6 +19,7 @@ public class Inventory extends Observable implements Serializable {
         for(VegetableConf vegetableConf : allVegetableConfs){
             this.inventory.put(vegetableConf.getName().toUpperCase(), 0);
         }
+        this.money = 0;
     }
 
     /**
@@ -37,6 +39,16 @@ public class Inventory extends Observable implements Serializable {
         }
 
         this.inventory.put(vegetableName, this.inventory.get(vegetableName) + 1);
+        this.setChanged();
+        this.notifyObservers();
+    }
+
+    public double getMoney() {
+        return money;
+    }
+
+    public void setMoney(double money) {
+        this.money = money;
         this.setChanged();
         this.notifyObservers();
     }

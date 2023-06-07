@@ -3,10 +3,7 @@ package com.matheoauer;
 import com.matheoauer.config.GardenConfigLoader;
 import com.matheoauer.models.Case;
 import com.matheoauer.models.Garden;
-import com.matheoauer.runnables.GrowthSimulator;
-import com.matheoauer.runnables.Scheduler;
-import com.matheoauer.runnables.SoilWatering;
-import com.matheoauer.runnables.WeatherSimulator;
+import com.matheoauer.runnables.*;
 import com.matheoauer.views.View;
 
 import javax.swing.*;
@@ -31,8 +28,8 @@ public class Main {
 
                 // Lecture de la HashMap désérialisée à partir du fichier
                 Garden g = (Garden) objetEntree.readObject();
-                garden.weather = g.weather;
-                garden.inventory = g.inventory;
+                garden.setWeather(g.getWeather());
+                garden.setInventory(g.getInventory());
                 for (int i = 0; i < g.getWidth(); i++) {
                     for (int j = 0; j < g.getHeight(); j++) {
                         Case c = new Case(g.getCase(i, j));
@@ -58,9 +55,11 @@ public class Main {
             GrowthSimulator growthSimulator = new GrowthSimulator();
             WeatherSimulator weatherSimulator = new WeatherSimulator();
             SoilWatering soilWatering = new SoilWatering();
+            PriceSimulator priceSimulator = new PriceSimulator();
             scheduler.addTask(weatherSimulator);
             scheduler.addTask(growthSimulator);
             scheduler.addTask(soilWatering);
+            scheduler.addTask(priceSimulator);
 
             view.setVisible(true);
             scheduler.start();

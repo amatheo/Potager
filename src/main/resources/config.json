@@ -9,6 +9,7 @@
   "vegetables": [
     {
       "name": "Eggplant",
+      "price": 50,
       "grow_rate": 0.025,
       "humidity_consumption": 0.015,
       "requirement": {
@@ -19,6 +20,7 @@
     },
     {
       "name": "Corn",
+      "price": 15,
       "grow_rate": 0.05,
       "humidity_consumption": 0.015,
       "requirement": {
@@ -29,6 +31,7 @@
     },
     {
       "name": "Apple",
+      "price": 5,
       "grow_rate": 0.1,
       "humidity_consumption": 0.015,
       "requirement": {
@@ -39,6 +42,7 @@
     },
     {
       "name": "Cucumber",
+      "price": 40,
       "grow_rate": 0.01,
       "humidity_consumption": 0.015,
       "requirement": {
