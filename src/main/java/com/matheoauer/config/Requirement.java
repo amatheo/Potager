@@ -2,7 +2,9 @@ package com.matheoauer.config;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Requirement {
+import java.io.Serializable;
+
+public class Requirement implements Serializable {
     private double humidity;
 
     private double temperatureMin;

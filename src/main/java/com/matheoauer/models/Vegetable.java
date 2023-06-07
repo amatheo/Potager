@@ -3,10 +3,11 @@ package com.matheoauer.models;
 import com.matheoauer.config.GardenConfigLoader;
 import com.matheoauer.config.VegetableConf;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Observable;
 
-public class Vegetable extends Observable {
+public class Vegetable extends Observable implements Serializable {
     private final String name;
     private VegetableConf vegetableConf;
     private Date plantedAt;

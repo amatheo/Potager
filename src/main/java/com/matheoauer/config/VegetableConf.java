@@ -2,9 +2,10 @@ package com.matheoauer.config;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class VegetableConf {
+public class VegetableConf implements Serializable {
     ArrayList<Double> stage;
     Requirement requirement;
     String name;

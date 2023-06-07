@@ -1,9 +1,10 @@
 package com.matheoauer.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Garden {
+public class Garden implements Serializable {
 
     private final int width;
     private final int height;

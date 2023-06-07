@@ -2,10 +2,11 @@ package com.matheoauer.models;
 
 import com.matheoauer.runnables.Scheduler;
 
+import java.io.Serializable;
 import java.util.Observable;
 import java.util.Observer;
 
-public class Case extends Observable implements Observer {
+public class Case extends Observable implements Observer, Serializable {
     private final int x;
     private final int y;
     private Vegetable vegetable;

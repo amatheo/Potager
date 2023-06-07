@@ -1,8 +1,9 @@
 package com.matheoauer.models;
 
+import java.io.Serializable;
 import java.util.Observable;
 
-public class Soil extends Observable {
+public class Soil extends Observable implements Serializable {
 
     public Soil(float humidity) {
         this.humidity = humidity;

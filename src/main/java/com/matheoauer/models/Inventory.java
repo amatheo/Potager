@@ -3,17 +3,18 @@ package com.matheoauer.models;
 import com.matheoauer.config.GardenConfigLoader;
 import com.matheoauer.config.VegetableConf;
 
+import java.io.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Observable;
 import java.util.logging.Logger;
 
-public class Inventory extends Observable {
-    private final HashMap<String, Integer> inventory;
+public class Inventory extends Observable implements Serializable {
+    private HashMap<String, Integer> inventory;
 
     public Inventory(){
-        this.inventory = new HashMap<>();
         List<VegetableConf> allVegetableConfs = GardenConfigLoader.getInstance().getVegetables();
+        this.inventory = new HashMap<>();
         for(VegetableConf vegetableConf : allVegetableConfs){
             this.inventory.put(vegetableConf.getName().toUpperCase(), 0);
         }
@@ -34,6 +35,7 @@ public class Inventory extends Observable {
             Logger.getGlobal().warning("This vegetable doesn't exist");
             return;
         }
+
         this.inventory.put(vegetableName, this.inventory.get(vegetableName) + 1);
         this.setChanged();
         this.notifyObservers();

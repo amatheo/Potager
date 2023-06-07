@@ -1,5 +1,6 @@
 package com.matheoauer.views;
 
+import com.matheoauer.Main;
 import com.matheoauer.SpriteEnum;
 import com.matheoauer.config.GardenConfigLoader;
 import com.matheoauer.models.Case;
@@ -17,6 +18,8 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.Date;
 import java.util.Observable;
@@ -39,8 +42,7 @@ public class View extends JFrame implements Observer {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent arg0) {
-                super.windowClosing(arg0);
-                System.exit(0);
+                saveData();
             }
         });
         this.build(garden);
@@ -84,10 +86,11 @@ public class View extends JFrame implements Observer {
 
                 caseViews[i][j] = caseView;
                 pan.add(caseView);
+                this.caseViews[i][j].update(caseModel, null);
             }
         }
 
-        InventoryView inventoryView = new InventoryView(garden.getInventory().getInventory().keySet());
+        InventoryView inventoryView = new InventoryView(garden.getInventory().getInventory());
         garden.getInventory().addObserver(inventoryView);
 
         pan.setBorder(blackline);
@@ -113,6 +116,24 @@ public class View extends JFrame implements Observer {
         if (o instanceof Scheduler scheduler) {
             Date date = scheduler.getDate();
             setTitle("Simulation Date - " + date);
+        }
+    }
+
+    private void saveData(){
+        try {
+            // Création d'un flux d'entrée depuis le fichier
+            FileOutputStream fichierSortie = new FileOutputStream(Main.pathUrl);
+            ObjectOutputStream objetSortie = new ObjectOutputStream(fichierSortie);
+
+            // Écriture de la HashMap sérialisée dans le fichier
+            objetSortie.writeObject(this.garden);
+
+            // Fermeture des flux
+            objetSortie.close();
+            fichierSortie.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

@@ -21,13 +21,13 @@ public class InventoryView extends JPanel implements Observer {
 
     private final HashMap<String, JLabel> inventory;
 
-    public InventoryView(Set<String> vegetableSet){
+    public InventoryView(HashMap<String, Integer> inventory) {
         setBorder(BorderFactory.createEmptyBorder(0,0,0,5));
         this.inventory = new HashMap<>();
-        this.setLayout(new GridLayout(vegetableSet.size(),1));
+        this.setLayout(new GridLayout(inventory.size(),1));
 
-        for (String vegetableName : vegetableSet) {
-            JLabel label = new JLabel("x0");
+        for (String vegetableName : inventory.keySet()) {
+            JLabel label = new JLabel("x" + inventory.get(vegetableName));
             SpriteEnum spriteEnum = SpriteEnum.valueOf(vegetableName.toUpperCase());
             Image iconImage = GardenConfigLoader.getInstance().getAtlasLoader().getSpriteImage(spriteEnum.getAtlasIndex());
             label.setIcon(new ImageIcon(iconImage.getScaledInstance(30, 30, 0)));

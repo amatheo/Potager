@@ -9,8 +9,12 @@ import com.matheoauer.runnables.WeatherSimulator;
 import com.matheoauer.views.View;
 
 import javax.swing.*;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.util.HashMap;
 
 public class Main {
+    public static final String pathUrl = "../../garden.save";
     public static void main(String[] args) {
 
         SwingUtilities.invokeLater(() -> {
@@ -18,6 +22,21 @@ public class Main {
             int width = GardenConfigLoader.getInstance().getGardenConfiguration().getWidth();
 
             Garden garden = new Garden(width, height);
+
+            try {
+                // Création d'un flux d'entrée depuis le fichier
+                FileInputStream fichierEntree = new FileInputStream(pathUrl);
+                ObjectInputStream objetEntree = new ObjectInputStream(fichierEntree);
+
+                // Lecture de la HashMap désérialisée à partir du fichier
+                garden = (Garden) objetEntree.readObject();
+
+                // Fermeture des flux
+                objetEntree.close();
+                fichierEntree.close();
+
+            } catch (Exception ignored) {}
+
             Scheduler scheduler = Scheduler.getInstance();
             scheduler.setGarden(garden);
             View view = new View(garden);
